@@ -11,6 +11,9 @@ export const ERROR_NOT_FOUND = 404;
 export const ERROR_UNSUPPORT_MEDIA_TYPE = 415;
 export const ERROR_CONFLICT = 409;
 
+//indexProductName
+export const INDEX_PRODUCT_NAME = "products"
+
 // Page
 export const PAGE_SIZE_DEFAULT = 10;
 
