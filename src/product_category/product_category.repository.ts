@@ -1,10 +1,10 @@
 import { EntityManager, getManager } from "typeorm";
-import { elasticSearchClient } from "../helper/elasticsearch";
+import { elasticSearchClient } from "../helpers/elasticsearch";
 import {
   ProductCategory,
 } from "../models";
 import { CreateProductCategoryDto } from "./dto/create_product_category.dto";
-import { INDEX_PRODUCT_NAME } from "../helper/constant";
+import { INDEX_PRODUCT_NAME } from "../helpers/constant";
 
 
 class ProductCategoryRepository {

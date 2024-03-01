@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 import { productCategoryService } from "./product_category.service";
-import { returnResponse } from "../helper/response";
+import { returnResponse } from "../helpers/response";
 import {
   CODE_CREATED_SUCCESS,
   CODE_SUCCESS,
   ERROR_BAD_REQUEST,
-} from "../helper/constant";
+} from "../helpers/constant";
 import { CreateProductCategoryDto } from "./dto/create_product_category.dto";
 
 /**
