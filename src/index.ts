@@ -1,42 +1,45 @@
 import "reflect-metadata";
-import { createConnection } from "typeorm";
-import express, { Application } from "express";
+import express, { Express } from "express";
 import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
-
 import Router from "./routes";
-// import dbConfig from "./config/database";
+import swaggerDocs from "./utils/swagger";
+import { DatabaseSingleton} from "./config/database";
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
-import dbConfig from "./config/database";
+const app: Express = express();
 
-const app: Application = express();
+const corsOptions: cors.CorsOptions = {
+  origin: [
+    "https://www.yoursite.com",
+    "http://127.0.0.1:8000",
+    "http://localhost:8000",
+    "http://localhost:9200",
+    "http://localhost:3000"
+  ], // Replace with the origin(s) of your client application
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  optionsSuccessStatus: 204, // Respond with a 204 for preflight requests
+};
+
+app.use(cors(corsOptions));
+
+app.use(cookieParser());
 
 app.use(express.json());
 app.use(morgan("tiny"));
 app.use(express.static("public"));
 
-app.use(
-  "/docs",
-  swaggerUi.serve,
-  swaggerUi.setup(undefined, {
-    swaggerOptions: {
-      url: "/swagger.json",
-    },
-  })
-);
-
 app.use(Router);
 
+app.listen(PORT, async () => {
+  console.log(`App is running at http://localhost:${PORT}`);
 
-createConnection(dbConfig)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log("Server is running on port", PORT);
-    });
-  })
-  .catch((err) => {
-    console.log("Unable to connect to db", err);
-    process.exit(1);
-  });
+  // await connectToDatabase();
+  const connection = await DatabaseSingleton.getInstance();
+  swaggerDocs(app, PORT);
+
+  // await DatabaseSingleton.closeConnection();
+});
