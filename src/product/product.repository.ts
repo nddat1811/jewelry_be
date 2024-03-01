@@ -9,6 +9,7 @@ import {
   ERROR_BAD_REQUEST,
   ERROR_INTERNAL_SERVER,
   ERROR_NOT_FOUND,
+  INDEX_PRODUCT_NAME,
 } from "../helpers/constant";
 import { productCategoryRepository } from "../product_category/product_category.repository";
 import { ProductPage } from "./entity/product";
@@ -20,8 +21,6 @@ interface SearchTotalHits {
   value: number;
   relation: string;
 }
-
-const indexName = "products";
 
 class ProductRepository {
   async getListProduct(
@@ -140,7 +139,7 @@ class ProductRepository {
       const id = +productId;
 
       const body = await elasticSearchClient.search({
-        index: indexName,
+        index: INDEX_PRODUCT_NAME,
         body: {
           query: {
             term: { id: id },
@@ -206,7 +205,7 @@ class ProductRepository {
         `${categoryName},  ${priceMin}, ${priceMax}, ${fullTextSearch} , ${sortValue},`
       );
       const searchParams = {
-        index: indexName,
+        index: INDEX_PRODUCT_NAME,
         body: {
           from: offset,
           size: limit,
@@ -435,7 +434,7 @@ class ProductRepository {
       const quantityConvert = +createdProduct.inventory?.quantity;
       // Insert new Product into elasticSearch
       await elasticSearchClient.index({
-        index: indexName,
+        index: INDEX_PRODUCT_NAME,
         body: {
           id: createdProduct.id,
           name: createdProduct.name,
@@ -540,7 +539,7 @@ class ProductRepository {
           // Update the product in ElasticSearch
           // Search ID of product in elasticSearch
           const searchResponse = await elasticSearchClient.search({
-            index: indexName,
+            index: INDEX_PRODUCT_NAME,
             body: {
               query: {
                 term: { id: updatedProduct.id },
@@ -556,7 +555,7 @@ class ProductRepository {
             }>;
 
             await elasticSearchClient.update({
-              index: indexName,
+              index: INDEX_PRODUCT_NAME,
               id: hits[0]._id,
               body: {
                 doc: {

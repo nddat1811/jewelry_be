@@ -14,7 +14,7 @@ import { CreateUserDto } from "../user/dto/create_user.dto";
 import { User } from "../models";
 import jwt, { SignOptions } from "jsonwebtoken";
 import dotenv from "dotenv";
-import { hashPassword } from "../helper/hashPassword";
+import { hashPassword } from "../helpers/hashPassword";
 dotenv.config();
 
 interface JwtPayload {

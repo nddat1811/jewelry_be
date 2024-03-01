@@ -16,7 +16,7 @@ export const ERROR_INTERNAL_SERVER = 500;
 export const INDEX_PRODUCT_NAME = "products"
 
 // Page
-export const PAGE_SIZE_DEFAULT = 10;
+export const PAGE_SIZE_DEFAULT = 20;
 
 //role
 export enum UserRole {

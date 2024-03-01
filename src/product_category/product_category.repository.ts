@@ -1,4 +1,4 @@
-import { EntityManager, getManager } from "typeorm";
+import { EntityManager  } from "typeorm";
 import { elasticSearchClient } from "../helpers/elasticsearch";
 import {
   ProductCategory,

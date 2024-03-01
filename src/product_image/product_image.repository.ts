@@ -1,16 +1,6 @@
-import { EntityManager, getManager, getRepository } from "typeorm";
-import { elasticSearchClient } from "../helper/elasticsearch";
+import { EntityManager, getRepository } from "typeorm";
 import { ProductImage } from "../models";
-import { productInventoryRepository } from "../inventory/inventory.repository";
-import {
-  CODE_CREATED_SUCCESS,
-  CODE_SUCCESS,
-  ERROR_BAD_REQUEST,
-  ERROR_NOT_FOUND,
-} from "../helper/constant";
 import { CreateProductImageDto } from "./dto/create_product_image.dto";
-
-const INDEX_PRODUCT_NAMEtName = "products";
 
 class ProductImageRepository {
   async createProductImage(

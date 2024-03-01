@@ -1,10 +1,9 @@
-import { EntityManager, Transaction, getRepository } from "typeorm";
+import { EntityManager } from "typeorm";
 import { ProductInventory } from "../models";
-import { OrderStatus } from "../helper/constant";
-import { elasticSearchClient } from "../helper/elasticsearch";
+import { elasticSearchClient } from "../helpers/elasticsearch";
 import { productRepository } from "../product/product.repository";
+import { INDEX_PRODUCT_NAME } from "../helpers/constant";
 
-const indexName = "products";
 class ProductInventoryRepository {
   async editInventory(
     productId: number,
@@ -33,7 +32,7 @@ class ProductInventoryRepository {
       }
 
       const searchResponse = await elasticSearchClient.search({
-        index: indexName,
+        index: INDEX_PRODUCT_NAME,
         body: {
           query: {
             term: { id: productId },
@@ -49,7 +48,7 @@ class ProductInventoryRepository {
         }>;
 
         await elasticSearchClient.update({
-          index: indexName,
+          index: INDEX_PRODUCT_NAME,
           id: hits[0]._id,
           body: {
             doc: {
