@@ -3,10 +3,10 @@ import {
   Product,
 } from "../models";
 import { CreateProductDto } from "./dto/create_product.dto";
-import { elasticSearchClient } from "../helper/elasticsearch";
+import { elasticSearchClient } from "../helpers/elasticsearch";
 import { productRepository } from "./product.repository";
 import { ProductPage } from "./entity/product";
-import { INDEX_PRODUCT_NAME } from "../helper/constant";
+import { INDEX_PRODUCT_NAME } from "../helpers/constant";
 
 class ProductService {
   async getAllProducts(

@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import { returnResponse, returnPagingResponse } from "../helper/response";
+import { returnResponse, returnPagingResponse } from "../helpers/response";
 import {
   CODE_SUCCESS,
   ERROR_BAD_REQUEST,
   ERROR_NOT_FOUND,
-} from "../helper/constant";
+} from "../helpers/constant";
 import { productService } from "./product.service";
-import { calcPagination } from "../helper/paging";
+import { calcPagination } from "../helpers/paging";
 import { CreateProductDto } from "./dto/create_product.dto";
 
 /**

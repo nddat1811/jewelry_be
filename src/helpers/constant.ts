@@ -10,6 +10,7 @@ export const ERROR_FORBIDDEN = 403;
 export const ERROR_NOT_FOUND = 404;
 export const ERROR_UNSUPPORT_MEDIA_TYPE = 415;
 export const ERROR_CONFLICT = 409;
+export const ERROR_INTERNAL_SERVER = 500;
 
 //indexProductName
 export const INDEX_PRODUCT_NAME = "products"

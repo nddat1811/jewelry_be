@@ -1,5 +1,5 @@
 import { DeepPartial, EntityManager, getRepository } from "typeorm";
-import { elasticSearchClient } from "../helper/elasticsearch";
+import { elasticSearchClient } from "../helpers/elasticsearch";
 import { CreateProductDto } from "./dto/create_product.dto";
 import { Product } from "../models";
 import { productInventoryRepository } from "../inventory/inventory.repository";
@@ -9,7 +9,7 @@ import {
   ERROR_BAD_REQUEST,
   ERROR_INTERNAL_SERVER,
   ERROR_NOT_FOUND,
-} from "../helper/constant";
+} from "../helpers/constant";
 import { productCategoryRepository } from "../product_category/product_category.repository";
 import { ProductPage } from "./entity/product";
 import { cloudinary, options } from "../utils/cloudinary";
